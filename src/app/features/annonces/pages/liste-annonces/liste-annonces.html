@@ -1,0 +1,16 @@
+<div class="page-container">
+  <h1>Annonces disponibles</h1>
+
+  <div *ngIf="loading" class="loading-container">
+    <p>Chargement des annonces...</p>
+  </div>
+
+  <div class="annonces-grid" *ngIf="!loading && annonces.length > 0">
+    <app-annonce-card *ngFor="let annonce of annonces" [annonce]="annonce"></app-annonce-card>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && annonces.length === 0">
+    <p>Aucune annonce disponible.</p>
+  </div>
+</div>
+

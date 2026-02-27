@@ -1,0 +1,53 @@
+<div class="page-container">
+  <h1>{{ annonceId ? 'Modifier une annonce' : 'Créer une annonce' }}</h1>
+
+  <form [formGroup]="annonceForm" (ngSubmit)="saveAnnonce()" class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="titre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description courte</mat-label>
+      <textarea matInput rows="3" formControlName="descriptionCourte"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description longue</mat-label>
+      <textarea matInput rows="5" formControlName="descriptionLongue"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mensualité</mat-label>
+      <input matInput type="number" formControlName="mensualite" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date disponibilité</mat-label>
+      <input matInput type="date" formControlName="dateDisponibilite" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="adresse" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="actif">Annonce active</mat-checkbox>
+
+    <div>
+      <label for="photos">Ajouter photos</label>
+      <input id="photos" type="file" accept="image/*" multiple (change)="onPhotoSelected($event)" />
+    </div>
+
+    <div class="photos-preview" *ngIf="photos.length > 0">
+      <div class="photo-item" *ngFor="let photo of photos; let i = index">
+        <img [src]="photo" alt="Aperçu photo annonce" />
+        <button mat-button type="button" color="warn" (click)="removePhoto(i)">Supprimer</button>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ annonceId ? 'Enregistrer les modifications' : 'Créer l\'annonce' }}
+    </button>
+  </form>
+</div>

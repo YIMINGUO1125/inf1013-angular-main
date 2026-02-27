@@ -1,0 +1,21 @@
+.page-container {
+  padding: 24px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.annonces-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.empty-state {
+  margin-top: 16px;
+  color: #666;
+}

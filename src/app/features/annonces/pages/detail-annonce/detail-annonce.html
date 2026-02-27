@@ -1,0 +1,48 @@
+<div class="page-container" *ngIf="!loading; else loadingTpl">
+  <ng-container *ngIf="!notFound && annonce; else notFoundTpl">
+    <h1>{{ annonce.titre }}</h1>
+    <p><strong>Adresse :</strong> {{ annonce.adresse }}</p>
+    <p><strong>Mensualité :</strong> {{ annonce.mensualite }} $</p>
+    <p><strong>Date de disponibilité :</strong> {{ annonce.dateDisponibilite }}</p>
+
+    <h3>Description</h3>
+    <p>{{ annonce.descriptionLongue }}</p>
+
+    <section *ngIf="isConnected; else loginHint">
+      <h3>Contacter l'annonceur</h3>
+      <form [formGroup]="contactForm" (ngSubmit)="sendContact()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Sujet</mat-label>
+          <input matInput formControlName="sujet" />
+          <mat-error *ngIf="contactForm.controls.sujet.touched && contactForm.controls.sujet.invalid">
+            Sujet requis (minimum 3 caractères)
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Message</mat-label>
+          <textarea matInput rows="5" formControlName="message"></textarea>
+          <mat-error *ngIf="contactForm.controls.message.touched && contactForm.controls.message.invalid">
+            Message requis (minimum 10 caractères)
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Envoyer
+        </button>
+      </form>
+    </section>
+
+    <ng-template #loginHint>
+      <p>Veuillez vous connecter pour contacter l'annonceur.</p>
+    </ng-template>
+  </ng-container>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Chargement...</div>
+</ng-template>
+
+<ng-template #notFoundTpl>
+  <p>Annonce introuvable.</p>
+</ng-template>

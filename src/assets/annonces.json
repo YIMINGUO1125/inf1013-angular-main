@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "titre": "Appartement 3 1/2 à louer",
+    "descriptionCourte": "Joli appartement lumineux au centre-ville",
+    "descriptionLongue": "Magnifique appartement de 3 1/2 situé au cœur de Trois-Rivières. Rénové récemment, avec cuisine moderne et grande fenêtre donnant sur le fleuve.",
+    "mensualite": 850,
+    "dateDisponibilite": "2026-03-01",
+    "adresse": "1234 rue des Forges, Trois-Rivières",
+    "consultations": 45,
+    "actif": true
+  },
+  {
+    "id": 2,
+    "titre": "Studio meublé disponible",
+    "descriptionCourte": "Studio tout équipé, idéal étudiant",
+    "descriptionLongue": "Studio confortable et meublé, proche de l'UQTR. Parfait pour un étudiant. Chauffage et électricité inclus.",
+    "mensualite": 650,
+    "dateDisponibilite": "2026-02-15",
+    "adresse": "567 boulevard des Récollets, Trois-Rivières",
+    "consultations": 23,
+    "actif": true
+  }
+]

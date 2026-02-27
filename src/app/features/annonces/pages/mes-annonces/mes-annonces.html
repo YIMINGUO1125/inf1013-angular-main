@@ -1,0 +1,34 @@
+<div class="page-container">
+  <h1>Mes annonces</h1>
+
+  <div *ngIf="loading" class="loading-container">
+    <p>Chargement...</p>
+  </div>
+
+  <div *ngIf="!loading && mesAnnonces.length === 0" class="empty-state">
+    <p>Vous n'avez aucune annonce pour le moment.</p>
+  </div>
+
+  <div class="annonces-list" *ngIf="!loading && mesAnnonces.length > 0">
+    <mat-card *ngFor="let annonce of mesAnnonces" class="annonce-item">
+      <mat-card-title>{{ annonce.titre }}</mat-card-title>
+      <mat-card-subtitle>{{ annonce.adresse }}</mat-card-subtitle>
+
+      <mat-card-content>
+        <p>{{ annonce.descriptionCourte }}</p>
+        <p><strong>Consultations :</strong> {{ annonce.consultations }}</p>
+        <p><strong>Statut :</strong> {{ annonce.actif ? 'Active' : 'Inactive' }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="modifierAnnonce(annonce.id)">
+          Modifier
+        </button>
+        <button mat-button color="accent" (click)="toggleActif(annonce)">
+          {{ annonce.actif ? 'Désactiver' : 'Réactiver' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

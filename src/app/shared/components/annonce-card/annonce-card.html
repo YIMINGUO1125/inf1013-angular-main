@@ -1,0 +1,31 @@
+<mat-card class="annonce-card">
+  <mat-card-header>
+    <mat-card-title>{{ annonce.titre }}</mat-card-title>
+    <mat-card-subtitle>{{ annonce.adresse }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="description">{{ annonce.descriptionCourte }}</p>
+    <div class="info-container">
+      <p class="prix">
+        <mat-icon>attach_money</mat-icon>
+        {{ annonce.mensualite }} $ / mois
+      </p>
+      <p class="date">
+        <mat-icon>calendar_today</mat-icon>
+        Disponible le {{ annonce.dateDisponibilite | date:'dd/MM/yyyy' }}
+      </p>
+    </div>
+    <p class="consultations">
+      <mat-icon>visibility</mat-icon>
+      {{ annonce.consultations }} consultations
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="['/annonces', annonce.id]">
+      <mat-icon>info</mat-icon>
+      Voir détails
+    </button>
+  </mat-card-actions>
+</mat-card>
