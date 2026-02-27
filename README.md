@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏠 Application d'Annonces de Logements - Jalon 1
 
 ## 📋 Objectif du Jalon 1
@@ -1093,3 +1094,6 @@ firebase deploy
 
 **Dernière mise à jour** : 13 février 2026  
 **GitLab** : https://dmigit.uqtr.ca/[votre-equipe]/annonces-app
+=======
+# inf1013-angular-main
+>>>>>>> 15bb25e5880c9827d14c7f01bf8bf856fb63f5a6
