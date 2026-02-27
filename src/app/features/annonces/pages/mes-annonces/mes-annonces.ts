@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Annonce } from '../../../../models/annonce.model';
 import { AnnoncesService } from '../../annonces';
@@ -18,7 +18,8 @@ export class MesAnnonces implements OnInit {
 
   constructor(
     private readonly annoncesService: AnnoncesService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -29,10 +30,12 @@ export class MesAnnonces implements OnInit {
           return proprietaireId === undefined || proprietaireId === this.currentUserId;
         });
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Erreur lors du chargement de mes annonces :', error);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }

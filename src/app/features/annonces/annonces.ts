@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Annonce } from '../../models/annonce.model';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Annonce } from '../../models/annonce.model';
 })
 export class AnnoncesService {
   // Chemin vers le fichier JSON simulé (Jalon 1)
-  private readonly jsonUrl = 'assets/annonces.json';
+  private readonly jsonUrl = '/assets/annonces.json';
 
   // Injection du HttpClient pour lire le JSON (et plus tard appeler le backend)
   constructor(private readonly http: HttpClient) {}
@@ -17,7 +17,24 @@ export class AnnoncesService {
    
    
   getAnnonces(): Observable<Annonce[]> {
-    return this.http.get<Annonce[]>(this.jsonUrl);
+     return this.http.get<unknown>(this.jsonUrl).pipe(
+      map((response) => {
+        if (Array.isArray(response)) {
+          return response as Annonce[];
+        }
+
+        if (response && typeof response === 'object' && 'annonces' in response) {
+          const annonces = (response as { annonces?: unknown }).annonces;
+          return Array.isArray(annonces) ? (annonces as Annonce[]) : [];
+        }
+
+        return [];
+      }),
+      catchError((error) => {
+        console.error('Erreur HTTP lors du chargement de /assets/annonces.json :', error);
+        return of([]);
+      })
+    );
   }
 
   //Récupère une annonce par son identifiant.
@@ -48,4 +65,4 @@ export class AnnoncesService {
 }
 
 // Alias de compatibilité : si du code existant importe encore `Annonces`,
-export { AnnoncesService as Annonces };
+ export { AnnoncesService as Annonces };

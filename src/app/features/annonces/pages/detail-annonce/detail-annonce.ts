@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AnnoncesService } from '../../annonces';
@@ -23,7 +23,8 @@ export class DetailAnnonce implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly annoncesService: AnnoncesService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly cdr: ChangeDetectorRef
   ) {
     this.contactForm = this.formBuilder.group({
       sujet: ['', [Validators.required, Validators.minLength(3)]],
@@ -44,11 +45,14 @@ export class DetailAnnonce implements OnInit {
       next: (annonce) => {
         this.annonce = annonce;
         this.notFound = !annonce;
+        this.cdr.detectChanges();
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.notFound = true;
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
