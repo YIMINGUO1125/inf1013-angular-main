@@ -48,21 +48,21 @@ export class AnnoncesService {
   //Crée une nouvelle annonce.
   
   createAnnonce(annonce: Annonce): void {
-    console.log('Création annonce (simulé):', annonce);
+    console.log('Création annonce :', annonce);
   }
 
   // Met à jour une annonce existante.
   
   updateAnnonce(id: number, annonce: Annonce): void {
-    console.log('Modification annonce (simulé):', id, annonce);
+    console.log('Modification annonce :', id, annonce);
   }
 
   // Active/Désactive une annonce.
 
   toggleActif(id: number): void {
-    console.log('Toggle actif annonce (simulé):', id);
+    console.log('Toggle actif annonce :', id);
   }
 }
 
 // Alias de compatibilité : si du code existant importe encore `Annonces`,
- export { AnnoncesService as Annonces };
+ export { AnnoncesService as Annonces};

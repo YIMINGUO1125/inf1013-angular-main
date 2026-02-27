@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 import { Annonce } from '../../../../models/annonce.model';
 import { AnnoncesService } from '../../annonces';
 
@@ -9,35 +10,25 @@ import { AnnoncesService } from '../../annonces';
   templateUrl: './mes-annonces.html',
   styleUrls: ['./mes-annonces.css']
 })
-export class MesAnnonces implements OnInit {
-  mesAnnonces: Annonce[] = [];
-  loading = true;
+export class MesAnnonces {
+  readonly mesAnnonces$: Observable<Annonce[]>;
 
   // Jalon I mock user id
   private readonly currentUserId = 1;
 
   constructor(
     private readonly annoncesService: AnnoncesService,
-    private readonly router: Router,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
-
-  ngOnInit(): void {
-    this.annoncesService.getAnnonces().subscribe({
-      next: (annonces) => {
-        this.mesAnnonces = annonces.filter((annonce) => {
-          const proprietaireId = (annonce as Annonce & { proprietaireId?: number }).proprietaireId;
+    private readonly router: Router
+  ) {
+    this.mesAnnonces$ = this.annoncesService.getAnnonces().pipe(
+      map((annonces) =>
+        annonces.filter((annonce) => {
+          const proprietaireId =
+            (annonce as Annonce & { proprietaireId?: number }).proprietaireId;
           return proprietaireId === undefined || proprietaireId === this.currentUserId;
-        });
-        this.loading = false;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement de mes annonces :', error);
-        this.loading = false;
-        this.cdr.detectChanges();
-      }
-    });
+        })
+      )
+    );
   }
 
   toggleActif(annonce: Annonce): void {

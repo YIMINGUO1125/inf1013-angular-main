@@ -1,16 +1,22 @@
-<div class="page-container">
-  <h1>Annonces disponibles</h1>
 
-  <div *ngIf="loading" class="loading-container">
-    <p>Chargement des annonces...</p>
-  </div>
-
-  <div class="annonces-grid" *ngIf="!loading && annonces.length > 0">
-    <app-annonce-card *ngFor="let annonce of annonces" [annonce]="annonce"></app-annonce-card>
-  </div>
-
-  <div class="empty-state" *ngIf="!loading && annonces.length === 0">
-    <p>Aucune annonce disponible.</p>
-  </div>
-</div>
-
+ <div class="page-container">
+   <h1>Annonces disponibles</h1>
+ 
+  
+   <ng-container *ngIf="annonces$ | async as annonces; else loadingTpl">
+     <div class="annonces-grid" *ngIf="annonces.length > 0">
+       <app-annonce-card *ngFor="let annonce of annonces" [annonce]="annonce"></app-annonce-card>
+     </div>
+ 
+   
+     <div class="empty-state" *ngIf="annonces.length === 0">
+       <p>Aucune annonce disponible.</p>
+     </div>
+   </ng-container>
+ </div>
+ 
+ <ng-template #loadingTpl>
+   <div class="loading-container">
+     <p>Chargement des annonces...</p>
+   </div>
+ </ng-template>

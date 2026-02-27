@@ -31,10 +31,13 @@
           Envoyer
         </button>
       </form>
+       
+      <p *ngIf="contactSentMessage">{{ contactSentMessage }}</p>
     </section>
 
     <ng-template #loginHint>
       <p>Veuillez vous connecter pour contacter l'annonceur.</p>
+      <button mat-stroked-button color="primary" (click)="goToLogin()">Se connecter</button>
     </ng-template>
   </ng-container>
 </div>

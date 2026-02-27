@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { Annonce } from '../../../../models/annonce.model';
 import { AnnoncesService } from '../../annonces';
 
@@ -8,27 +9,13 @@ import { AnnoncesService } from '../../annonces';
   templateUrl: './liste-annonces.html',
   styleUrls: ['./liste-annonces.css']
 })
-export class ListeAnnonces implements OnInit {
-  annonces: Annonce[] = [];
-  loading = true;
+ 
+export class ListeAnnonces {
+  readonly annonces$: Observable<Annonce[]>;
+   constructor(private readonly annoncesService: AnnoncesService) {
+    this.annonces$ = this.annoncesService
+      .getAnnonces()
+      .pipe(map((annonces) => annonces.filter((annonce) => annonce.actif)));
 
-  constructor(
-    private readonly annoncesService: AnnoncesService,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
-
-  ngOnInit(): void {
-    this.annoncesService.getAnnonces().subscribe({
-      next: (annonces) => {
-        this.annonces = annonces.filter((annonce) => annonce.actif);
-        this.loading = false;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement des annonces :', error);
-        this.loading = false;
-        this.cdr.detectChanges();
-      }
-    });
   }
 }
