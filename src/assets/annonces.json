@@ -8,7 +8,8 @@
     "dateDisponibilite": "2026-03-01",
     "adresse": "1234 rue des Forges, Trois-Rivières",
     "consultations": 45,
-    "actif": true
+    "actif": true,
+    "userId": 1
   },
   {
     "id": 2,
@@ -19,6 +20,7 @@
     "dateDisponibilite": "2026-02-15",
     "adresse": "567 boulevard des Récollets, Trois-Rivières",
     "consultations": 23,
-    "actif": true
+    "actif": true,
+    "userId": 2
   }
 ]

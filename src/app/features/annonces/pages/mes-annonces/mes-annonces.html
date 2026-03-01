@@ -9,9 +9,10 @@
       <div class="annonces-list" *ngIf="mesAnnonces.length > 0">
       <mat-card *ngFor="let annonce of mesAnnonces" class="annonce-item">
         <mat-card-title>{{ annonce.titre }}</mat-card-title>
-        <mat-card-subtitle>{{ annonce.adresse }}</mat-card-subtitle>  
+        <mat-card-subtitle>{{ annonce.adresse }}</mat-card-subtitle>
+         <p>{{ annonce.consultations }} consultations</p> 
 
-           <mat-card-actions>
+        <mat-card-actions>
           <button mat-stroked-button color="primary" (click)="modifierAnnonce(annonce.id)">
             Modifier
           </button>

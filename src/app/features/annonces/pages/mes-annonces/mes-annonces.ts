@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { AuthService } from '../../../../core/auth';
 import { Annonce } from '../../../../models/annonce.model';
 import { AnnoncesService } from '../../annonces';
 
@@ -14,19 +15,17 @@ export class MesAnnonces {
   readonly mesAnnonces$: Observable<Annonce[]>;
 
   
-  private readonly currentUserId = 1;
+  
 
   constructor(
     private readonly annoncesService: AnnoncesService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) {
+    const currentUserId = this.authService.getCurrentUser()?.id;
     this.mesAnnonces$ = this.annoncesService.getAnnonces().pipe(
       map((annonces) =>
-        annonces.filter((annonce) => {
-          const proprietaireId =
-            (annonce as Annonce & { proprietaireId?: number }).proprietaireId;
-          return proprietaireId === undefined || proprietaireId === this.currentUserId;
-        })
+       annonces.filter((annonce) => annonce.userId === currentUserId)  
       )
     );
   }

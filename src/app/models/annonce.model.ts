@@ -12,5 +12,6 @@ export interface Annonce {
   consultations: number;
   actif: boolean;
   photos?: string[]; // Tableau de URLs ou de données d'images 
+  userId: number; // ID de l'utilisateur qui a créé l'annonce
 }
 

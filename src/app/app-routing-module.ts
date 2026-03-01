@@ -11,14 +11,16 @@ import { AuthGuard } from './core/auth-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'annonces', pathMatch: 'full' },
+  { path: 'mes', component: MesAnnonces, canActivate: [AuthGuard] },
 
   {
     path: 'annonces',
         children: [
       { path: '', component: ListeAnnonces },
-      { path: 'mes', component: MesAnnonces, canActivate: [AuthGuard] },
       { path: 'nouvelle', component: EditionAnnonce, canActivate: [AuthGuard] },
-      { path: ':id/modifier', component: EditionAnnonce, canActivate: [AuthGuard] },
+      { path: ':id/modifier', component: EditionAnnonce, canActivate: [AuthGuard]
+        //:id = Quelle annonce souhaitez-vous modifier ? /modifier = En cours de modification
+       },
       { path: ':id', component: DetailAnnonce }
     ]
   },

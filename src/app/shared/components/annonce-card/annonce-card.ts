@@ -8,7 +8,7 @@ import { Annonce } from '../../../models';
 
 @Component({
   selector: 'app-annonce-card',
-   standalone: false,
+  standalone: false,
   templateUrl: './annonce-card.html',
   styleUrls: ['./annonce-card.css']
 })
