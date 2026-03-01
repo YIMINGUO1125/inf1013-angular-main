@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { User } from '../models';
 
 @Injectable({
@@ -7,7 +7,9 @@ import { User } from '../models';
 })
 export class AuthService {
   private storageKey = 'currentUser';
-
+  private readonly loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  readonly loggedIn$ = this.loggedInSubject.asObservable();
+  
   constructor() {}
 
   /**
@@ -51,6 +53,7 @@ export class AuthService {
       // Stocker l'utilisateur (sans le mot de passe) dans localStorage
       const { password, ...userWithoutPassword } = user;
       localStorage.setItem(this.storageKey, JSON.stringify(userWithoutPassword));
+      this.loggedInSubject.next(true);
       return of(userWithoutPassword);
     } else {
       return throwError(() => new Error('Identifiants incorrects'));
@@ -77,6 +80,7 @@ export class AuthService {
    */
   logout(): void {
     localStorage.removeItem(this.storageKey);
+    this.loggedInSubject.next(false);
   }
 
   /**
@@ -92,6 +96,7 @@ export class AuthService {
    */
   updateProfile(userData: User): void {
     localStorage.setItem(this.storageKey, JSON.stringify(userData));
+    this.loggedInSubject.next(true)
     // TODO Jalon II : return this.http.put<User>('/api/users/profile', userData);
   }
 }

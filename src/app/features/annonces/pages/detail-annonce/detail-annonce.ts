@@ -1,17 +1,17 @@
-import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
-import { ActivatedRoute ,Router} from '@angular/router';
-import { FormBuilder,Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AnnoncesService } from '../../annonces';
 import { Annonce } from '../../../../models/annonce.model';
 import { AuthService } from '../../../../core/auth';
-
 @Component({
   selector: 'app-detail-annonce',
   standalone: false,
   templateUrl: './detail-annonce.html',
   styleUrls: ['./detail-annonce.css']
 })
-export class DetailAnnonce implements OnInit {
+export class DetailAnnonce implements OnInit, OnDestroy {
   annonce?: Annonce;
   loading = true;
   notFound = false;
@@ -19,6 +19,7 @@ export class DetailAnnonce implements OnInit {
   contactSentMessage = '';
  
   contactForm: any;
+  private authSubscription?: Subscription;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -36,6 +37,9 @@ export class DetailAnnonce implements OnInit {
 
   ngOnInit(): void {
     this.isConnected = this.authService.isLoggedIn();
+    this.authSubscription = this.authService.loggedIn$.subscribe(
+      (loggedIn) => (this.isConnected = loggedIn)
+    );
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (!id || Number.isNaN(id)) {
@@ -59,7 +63,10 @@ export class DetailAnnonce implements OnInit {
       }
     });
   }
-  
+   ngOnDestroy(): void {
+    this.authSubscription?.unsubscribe();
+  }
+
   goToLogin(): void {
     this.router.navigate(['/auth/login']);
   }

@@ -13,7 +13,6 @@ import { AnnoncesService } from '../../annonces';
 })
 export class EditionAnnonce implements OnInit {
   annonceId?: number;
-  photos: string[] = [];
   private annonceUserId = 0;
   annonceForm: any;
 
@@ -32,9 +31,15 @@ export class EditionAnnonce implements OnInit {
       mensualite: [0, [Validators.required, Validators.min(1)]],
       dateDisponibilite: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
-      actif: [true, [Validators.required]]
+      actif: [true, [Validators.required]],
+      photos: [[], [Validators.required]]
     });
   }
+  
+  get photos(): string[] {
+    return this.annonceForm.get('photos')?.value ?? [];
+  }
+
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (!idParam) {
@@ -52,7 +57,6 @@ export class EditionAnnonce implements OnInit {
         return;
       }
 
-      this.photos = annonce.photos ?? [];
       this.annonceUserId = annonce.userId;
       this.annonceForm.patchValue({
         titre: annonce.titre,
@@ -61,7 +65,8 @@ export class EditionAnnonce implements OnInit {
         mensualite: annonce.mensualite,
         dateDisponibilite: annonce.dateDisponibilite,
         adresse: annonce.adresse,
-        actif: annonce.actif
+        actif: annonce.actif,
+        photos: annonce.photos ?? []
       });
     });
   }
@@ -73,19 +78,27 @@ export class EditionAnnonce implements OnInit {
       return;
     }
 
-    Array.from(files).forEach((file) => {
+    const selectedFiles = Array.from(files);
+    selectedFiles.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
         if (typeof reader.result === 'string') {
-          this.photos.push(reader.result);
+          const currentPhotos = this.photos;
+          this.annonceForm.get('photos')?.setValue([...currentPhotos, reader.result]);
+          this.annonceForm.get('photos')?.markAsTouched();
+          this.annonceForm.get('photos')?.updateValueAndValidity();
         }
       };
       reader.readAsDataURL(file);
     });
+    input.value = '';
   }
 
   removePhoto(index: number): void {
-    this.photos.splice(index, 1);
+    const currentPhotos = this.photos;
+    currentPhotos.splice(index, 1);
+    this.annonceForm.get('photos')?.setValue(currentPhotos);
+    this.annonceForm.get('photos')?.updateValueAndValidity();
   }
 
   saveAnnonce(): void {
@@ -105,7 +118,7 @@ export class EditionAnnonce implements OnInit {
       adresse: formValue.adresse ?? '',
       consultations: 0,
       actif: formValue.actif ?? true,
-      photos: this.photos,
+      photos: formValue.photos ?? [],
       userId: this.annonceUserId
     };
 

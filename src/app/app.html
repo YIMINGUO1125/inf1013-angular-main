@@ -3,8 +3,9 @@
     <span>Application d'annonces</span>
     <span class="spacer"></span>
     <a mat-button routerLink="/annonces">Annonces</a>
-    <a mat-button routerLink="/auth/login">Connexion</a>
-    <a mat-button routerLink="/auth/inscription">Inscription</a>
+    <a mat-button *ngIf="!isLoggedIn" routerLink="/auth/login">Connexion</a>
+    <a mat-button *ngIf="!isLoggedIn" routerLink="/auth/inscription">Inscription</a>
+    <a mat-button *ngIf="isLoggedIn" routerLink="/auth/profil">Mon profil</a>
   </mat-toolbar>
 
   <main class="container">
@@ -30,8 +31,9 @@
         <h3>Navigation</h3>
         <a routerLink="/annonces">Accueil</a>
         <a routerLink="/mes-annonces">Mes annonces</a>
-        <a routerLink="/auth/login">Connexion</a>
-        <a routerLink="/auth/inscription">Inscription</a>
+        <a *ngIf="!isLoggedIn" routerLink="/auth/login">Connexion</a>
+        <a *ngIf="!isLoggedIn" routerLink="/auth/inscription">Inscription</a>
+        <a *ngIf="isLoggedIn" routerLink="/auth/profil">Mon profil</a>
       </section>
 
       <section>

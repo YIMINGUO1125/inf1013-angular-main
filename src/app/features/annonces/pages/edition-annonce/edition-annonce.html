@@ -34,9 +34,12 @@
 
     <mat-checkbox formControlName="actif">Annonce active</mat-checkbox>
 
-    <div>
+    <div class="photo-upload">
       <label for="photos">Ajouter photos</label>
       <input id="photos" type="file" accept="image/*" multiple (change)="onPhotoSelected($event)" />
+       <p class="field-error" *ngIf="annonceForm.get('photos')?.invalid && annonceForm.get('photos')?.touched">
+        Au moins une photo est obligatoire.
+      </p>
     </div>
 
     <div class="photos-preview" *ngIf="photos.length > 0">
