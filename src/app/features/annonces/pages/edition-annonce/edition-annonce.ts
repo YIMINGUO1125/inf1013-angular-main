@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../../core/auth';
 import { Annonce } from '../../../../models/annonce.model';
 import { AnnoncesService } from '../../annonces';
 
@@ -13,15 +14,17 @@ import { AnnoncesService } from '../../annonces';
 export class EditionAnnonce implements OnInit {
   annonceId?: number;
   photos: string[] = [];
-
+  private annonceUserId = 0;
   annonceForm: any;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
     private readonly router: Router,
     private readonly annoncesService: AnnoncesService
   ) {
+    this.annonceUserId = this.authService.getCurrentUser()?.id ?? 0;
     this.annonceForm = this.formBuilder.group({
       titre: ['', [Validators.required]],
       descriptionCourte: ['', [Validators.required, Validators.maxLength(200)]],
@@ -50,6 +53,7 @@ export class EditionAnnonce implements OnInit {
       }
 
       this.photos = annonce.photos ?? [];
+      this.annonceUserId = annonce.userId;
       this.annonceForm.patchValue({
         titre: annonce.titre,
         descriptionCourte: annonce.descriptionCourte,
@@ -101,7 +105,8 @@ export class EditionAnnonce implements OnInit {
       adresse: formValue.adresse ?? '',
       consultations: 0,
       actif: formValue.actif ?? true,
-      photos: this.photos
+      photos: this.photos,
+      userId: this.annonceUserId
     };
 
     if (this.annonceId) {

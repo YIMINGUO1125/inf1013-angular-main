@@ -17,7 +17,7 @@ export class DetailAnnonce implements OnInit {
   notFound = false;
   isConnected = false;
   contactSentMessage = '';
-
+ 
   contactForm: any;
 
   constructor(
