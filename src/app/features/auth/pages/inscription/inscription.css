@@ -1,0 +1,41 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+   padding: 70px;
+}
+
+.inscription-card {
+  width: 400px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  background-color: rgba(255,255,255,0.95);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 48%;
+  margin-right: 4%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  color: red;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.link-text {
+  margin-top: 15px;
+  text-align: center;
+}

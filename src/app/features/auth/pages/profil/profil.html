@@ -1,1 +1,111 @@
-<p>profil works!</p>
+<div class="profile-page">
+
+  <!-- HEADER PROFIL -->
+  <mat-card class="profile-header">
+
+    <div class="profile-info">
+
+      <h2 class="profile-name">
+        {{ profilForm.get('prenom')?.value }}
+        {{ profilForm.get('nom')?.value }}
+      </h2>
+
+      <p class="member-text">Membre actif</p>
+
+      <div class="actions">
+
+        <button mat-stroked-button color="primary"
+                *ngIf="!editMode"
+                (click)="enableEdit()">
+          Modifier le profil
+        </button>
+
+        <button mat-flat-button color="primary"
+                *ngIf="editMode"
+                (click)="onSubmit()">
+          Enregistrer
+        </button>
+
+         <button mat-stroked-button color="accent"
+           *ngIf="!editMode"
+          (click)="creerAnnonce()">
+  
+          Créer une annonce
+  
+        </button> 
+
+        <button mat-stroked-button color="warn"
+                (click)="deconnexion()">
+          Déconnexion
+        </button>
+
+      </div>
+
+    </div>
+
+  </mat-card>
+
+  <!-- FORM EDITION -->
+  <mat-card *ngIf="editMode" class="edit-card">
+
+  <form [formGroup]="profilForm">
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Prénom</mat-label>
+        <input matInput formControlName="prenom">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Téléphone</mat-label>
+      <input matInput formControlName="telephone">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="adresse">
+    </mat-form-field>
+
+  </form>
+
+</mat-card>
+
+   MES ANNONCES 
+  <!-- <div class="annonces-section">
+
+    <h2 class="section-title">Mes annonces</h2>
+
+    <div *ngIf="mesAnnonces.length === 0" class="empty">
+      Vous n'avez encore publié aucune annonce.
+    </div>
+
+    <div class="annonces-grid">
+      <mat-card *ngFor="let annonce of mesAnnonces" class="annonce-card">
+
+        <h3>{{ annonce.titre }}</h3>
+
+        <p class="description">
+          {{ annonce.description }}
+        </p>
+
+        <div class="price">
+          {{ annonce.prix }} $
+        </div>
+
+      </mat-card>
+    </div>
+
+  </div> -->
+
+</div>

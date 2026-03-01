@@ -1,0 +1,93 @@
+.profile-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* HEADER */
+.profile-header {
+  text-align: center;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.profile-name {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.member-text {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* BOUTONS */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* EDIT CARD */
+.edit-card {
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+/* SECTION ANNONCES */
+.annonces-section {
+  margin-top: 40px;
+}
+
+.section-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.annonces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.annonce-card {
+  padding: 20px;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.annonce-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.description {
+  color: #555;
+  margin: 10px 0;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 18px;
+  color: #1976d2;
+}
+
+.empty {
+  color: gray;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -13,7 +13,7 @@ import { AnnoncesService } from '../../annonces';
 export class MesAnnonces {
   readonly mesAnnonces$: Observable<Annonce[]>;
 
-  // Jalon I mock user id
+  
   private readonly currentUserId = 1;
 
   constructor(
