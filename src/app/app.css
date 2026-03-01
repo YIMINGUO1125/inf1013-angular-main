@@ -1,9 +1,89 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
 
 .container {
+  flex: 1;
   padding: 20px;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+}
+
+.site-footer {
+  background: #383943;
+  color: #f2f2f3;
+  margin-top: 48px;
+  padding: 22px 40px 12px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 28px;
+}
+
+.site-footer h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.site-footer p,
+.site-footer a {
+  margin: 4px 0;
+  color: #f2f2f3;
+  text-decoration: none;
+  display: block;
+  font-size: 0.92rem;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0 14px;
+}
+
+.socials span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #383943;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.maintenance-btn {
+  background: transparent;
+  color: #4d73d8;
+  border: 1px solid #5f5f68;
+  border-radius: 16px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 18px auto 0;
+  padding-top: 12px;
+  border-top: 1px solid #50515b;
+  font-size: 0.85rem;
+  color: #dddddf;
+}
+
+@media (max-width: 900px) {
+  .footer-content {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
 }
