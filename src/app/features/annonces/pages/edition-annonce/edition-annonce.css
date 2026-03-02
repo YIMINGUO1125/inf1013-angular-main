@@ -9,6 +9,39 @@
   gap: 1rem;
 }
 
+.field-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field-group label {
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.field-group input,
+.field-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0.75rem 0.85rem;
+}
+
+.field-group textarea {
+  resize: vertical;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+  outline: none;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 1px #1d4ed8;
+}
 
 .photo-upload {
   display: grid;
@@ -37,4 +70,15 @@
   height: 120px;
   object-fit: cover;
   border-radius: 6px;
+}
+
+.active-toggle {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.field-hint {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.85rem;
 }

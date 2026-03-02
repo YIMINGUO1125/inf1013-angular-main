@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -48,6 +49,7 @@ import { MesAnnonces } from './features/annonces/pages/mes-annonces/mes-annonces
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatCheckboxModule,
     
   ],
   providers: [],

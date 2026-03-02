@@ -2,37 +2,40 @@
   <h1>{{ annonceId ? 'Modifier une annonce' : 'Créer une annonce' }}</h1>
 
   <form [formGroup]="annonceForm" (ngSubmit)="saveAnnonce()" class="form-grid">
-    <mat-form-field appearance="outline">
-      <mat-label>Titre</mat-label>
-      <input matInput formControlName="titre" />
-    </mat-form-field>
+       <div class="field-group">
+      <label for="titre">Titre</label>
+      <input id="titre" type="text" formControlName="titre" />
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Description courte</mat-label>
-      <textarea matInput rows="3" formControlName="descriptionCourte"></textarea>
-    </mat-form-field>
+    <div class="field-group">
+      <label for="descriptionCourte">Description courte</label>
+      <textarea id="descriptionCourte" rows="3" formControlName="descriptionCourte"></textarea>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Description longue</mat-label>
-      <textarea matInput rows="5" formControlName="descriptionLongue"></textarea>
-    </mat-form-field>
+    <div class="field-group">
+      <label for="descriptionLongue">Description longue</label>
+      <textarea id="descriptionLongue" rows="5" formControlName="descriptionLongue"></textarea>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Mensualité</mat-label>
-      <input matInput type="number" formControlName="mensualite" />
-    </mat-form-field>
+    <div class="field-group">
+      <label for="mensualite">Mensualité</label>
+      <input id="mensualite" type="number" formControlName="mensualite" />
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Date disponibilité</mat-label>
-      <input matInput type="date" formControlName="dateDisponibilite" />
-    </mat-form-field>
+    <div class="field-group">
+      <label for="dateDisponibilite">Date disponibilité</label>
+      <input id="dateDisponibilite" type="date" formControlName="dateDisponibilite" />
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Adresse</mat-label>
-      <input matInput formControlName="adresse" />
-    </mat-form-field>
+    <div class="field-group">
+      <label for="adresse">Adresse</label>
+      <input id="adresse" type="text" formControlName="adresse" />
+    </div>
 
-    <mat-checkbox formControlName="actif">Annonce active</mat-checkbox>
+    <div class="active-toggle">
+      <mat-checkbox formControlName="actif">Publier cette annonce</mat-checkbox>
+      <p class="field-hint">Si décoché, l'annonce sera enregistrée mais non visible publiquement.</p>
+    </div>
 
     <div class="photo-upload">
       <label for="photos">Ajouter photos</label>
@@ -54,3 +57,4 @@
     </button>
   </form>
 </div>
+      
