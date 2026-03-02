@@ -14,9 +14,6 @@ import { AnnoncesService } from '../../annonces';
 export class MesAnnonces {
   readonly mesAnnonces$: Observable<Annonce[]>;
 
-  
-  
-
   constructor(
     private readonly annoncesService: AnnoncesService,
     private readonly authService: AuthService,
@@ -24,9 +21,7 @@ export class MesAnnonces {
   ) {
     const currentUserId = this.authService.getCurrentUser()?.id;
     this.mesAnnonces$ = this.annoncesService.getAnnonces().pipe(
-      map((annonces) =>
-       annonces.filter((annonce) => annonce.userId === currentUserId)  
-      )
+       map((annonces) => annonces.filter((annonce) => annonce.userId === currentUserId))
     );
   }
 

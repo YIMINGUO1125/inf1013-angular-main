@@ -47,65 +47,46 @@
 
   <!-- FORM EDITION -->
   <mat-card *ngIf="editMode" class="edit-card">
+     <form [formGroup]="profilForm">
 
-  <form [formGroup]="profilForm">
+      <div class="row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="nom">
+        </mat-form-field>
 
-    <div class="row">
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>Nom</mat-label>
-        <input matInput formControlName="nom">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="prenom">
+        </mat-form-field>
+      </div>
+ 
+       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Téléphone</mat-label>
+        <input matInput formControlName="telephone">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Prénom</mat-label>
         <input matInput formControlName="prenom">
       </mat-form-field>
-    </div>
+   
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Téléphone</mat-label>
-      <input matInput formControlName="telephone">
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Adresse</mat-label>
+        <input matInput formControlName="adresse">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Adresse</mat-label>
-      <input matInput formControlName="adresse">
-    </mat-form-field>
-
-  </form>
-
-</mat-card>
-
-   MES ANNONCES 
-  <!-- <div class="annonces-section">
-
+    </form>
+  </mat-card>
+  
+   <section class="annonces-section">
     <h2 class="section-title">Mes annonces</h2>
-
-    <div *ngIf="mesAnnonces.length === 0" class="empty">
-      Vous n'avez encore publié aucune annonce.
-    </div>
-
-    <div class="annonces-grid">
-      <mat-card *ngFor="let annonce of mesAnnonces" class="annonce-card">
-
-        <h3>{{ annonce.titre }}</h3>
-
-        <p class="description">
-          {{ annonce.description }}
-        </p>
-
-        <div class="price">
-          {{ annonce.prix }} $
-        </div>
-
-      </mat-card>
-    </div>
-
-  </div> -->
+    <p class="member-text">Gérez vos annonces actives, désactivez-les ou modifiez-les.</p>
+    <button mat-stroked-button color="primary" routerLink="/mes-annonces">
+      Aller à mes annonces
+    </button>
+  </section>
 
 </div>
+

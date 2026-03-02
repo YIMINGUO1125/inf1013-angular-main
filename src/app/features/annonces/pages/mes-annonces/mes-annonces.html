@@ -3,20 +3,25 @@
   
   <ng-container *ngIf="mesAnnonces$ | async as mesAnnonces; else loadingTpl">
     <div *ngIf="mesAnnonces.length === 0" class="empty-state">
-      <p>Vous n'avez aucune annonce pour le moment.</p>
+      <p>Vous n'avez pas encore d'annonces.</p>
+      <button mat-raised-button color="primary" routerLink="/annonces/nouvelle">
+        Créer une annonce
+      </button>
     </div>
     
       <div class="annonces-list" *ngIf="mesAnnonces.length > 0">
       <mat-card *ngFor="let annonce of mesAnnonces" class="annonce-item">
         <mat-card-title>{{ annonce.titre }}</mat-card-title>
-        <mat-card-subtitle>{{ annonce.adresse }}</mat-card-subtitle>
-         <p>{{ annonce.consultations }} consultations</p> 
+        <mat-card-subtitle>
+          {{ annonce.adresse }} · {{ annonce.actif ? 'Active' : 'Désactivée' }}
+        </mat-card-subtitle>
+        <p>{{ annonce.consultations }} consultations</p>
 
         <mat-card-actions>
           <button mat-stroked-button color="primary" (click)="modifierAnnonce(annonce.id)">
             Modifier
           </button>
-          <button mat-button color="accent" (click)="toggleActif(annonce)">
+          <button mat-button [color]="annonce.actif ? 'warn' : 'accent'" (click)="toggleActif(annonce)">
             {{ annonce.actif ? 'Désactiver' : 'Réactiver' }}
           </button>
         </mat-card-actions>

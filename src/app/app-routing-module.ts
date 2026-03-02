@@ -11,7 +11,7 @@ import { AuthGuard } from './core/auth-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'annonces', pathMatch: 'full' },
-  { path: 'mes', component: MesAnnonces, canActivate: [AuthGuard] },
+  { path: 'mes-annonces', component: MesAnnonces, canActivate: [AuthGuard] },
 
   {
     path: 'annonces',
