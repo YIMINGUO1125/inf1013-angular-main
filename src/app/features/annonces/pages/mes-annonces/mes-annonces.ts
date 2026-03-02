@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { AuthService } from '../../../../core/auth';
@@ -12,6 +12,7 @@ import { AnnoncesService } from '../../annonces';
   styleUrls: ['./mes-annonces.css']
 })
 export class MesAnnonces {
+  @Input() em = false; // Permet de réutiliser ce composant dans d'autres contextes
   readonly mesAnnonces$: Observable<Annonce[]>;
 
   constructor(

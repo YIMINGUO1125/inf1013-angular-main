@@ -1,5 +1,5 @@
 <div class="page-container">
-  <h1>Mes annonces</h1>
+   <h1 *ngIf="!em">Mes annonces</h1>
   
   <ng-container *ngIf="mesAnnonces$ | async as mesAnnonces; else loadingTpl">
     <div *ngIf="mesAnnonces.length === 0" class="empty-state">
