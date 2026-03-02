@@ -78,6 +78,6 @@ export class Profil implements OnInit {
 
   // Naviguer vers la page de création d'annonce
   creerAnnonce(): void {
-    this.router.navigate(['/annonces/creer']);
+    this.router.navigate(['/annonces/nouvelle']);
   }
 }
